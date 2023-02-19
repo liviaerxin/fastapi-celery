@@ -13,5 +13,7 @@ RUN pip install --upgrade pip
 COPY ./requirements.txt .
 RUN pip install -r requirements.txt
 
+COPY ./logs ./logs
+
 # copy project
 COPY ./app ./app

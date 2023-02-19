@@ -1,11 +1,15 @@
 from celery import Celery
 from celery.result import AsyncResult
 import time
+import os
 
+CELERY_BROKER_URL = os.environ.get("CELERY_BROKER_URL", "redis://localhost:6379")
+CELERY_RESULT_BACKEND = os.environ.get("CELERY_RESULT_BACKEND", "redis://:6379")
+print(CELERY_BROKER_URL)
 celery = Celery(
     "tasks",
-    broker="redis://localhost",
-    backend="redis://localhost",
+    broker=CELERY_BROKER_URL,
+    backend=CELERY_RESULT_BACKEND,
     result_extended=True,  # retrieve task name in `AsyncResult(task_id)`
     task_track_started=True,
 )
