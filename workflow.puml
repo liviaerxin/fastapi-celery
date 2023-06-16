@@ -1,0 +1,34 @@
+@startuml workflow
+
+participant Client
+participant "Server" as Server
+database DB
+queue Redis
+participant "Celery Worker" as Worker
+
+
+Client -> Server: Do Task
+activate Server
+
+Server -> Redis: Assign Task via celery
+
+Worker <- Redis: Do Task
+activate Worker
+Worker -> DB: Create Task
+
+Client <- Server: Task Created
+deactivate Server
+
+loop until task done
+    Client -> Server: Query Task
+    Server -> DB: Query Task via celery
+    Server <- DB: Task
+    Client <- Server: Task Status
+end loop
+
+' Worker -> Redis: Task Done
+Worker -> DB: Task Done
+
+deactivate Worker
+
+@enduml
