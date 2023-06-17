@@ -1,6 +1,25 @@
 # FastAPI + Celery + Redis/PostgresSQL + Flower Example
 
-An example microservices illustrates how to perform heavy background computation task such as running machine learning model, using tech stack:
+An example microservices illustrates how to perform heavy background computation task such as running machine learning model.
+
+![](./2023-06-16-16-20-19.png)
+
+Case 1: Celery uses `Redis` as both of `broker` and `backend`.
+
+tech stack:
+
+- FastAPI
+- Celery
+- Redis: as broker and backend
+
+workflow:
+
+![workflow1](./out/workflow1.png)
+
+Case 2:
+Celery uses  `Redis` as `broker` and `PostgresSQL` as `backend`.
+
+tech stack:
 
 - FastAPI
 - Celery
@@ -8,10 +27,14 @@ An example microservices illustrates how to perform heavy background computation
 - PostgresSQL: lower backend
 - SQLAlchemy: higher backend
 
-![workflow](./workflow.png)
+workflow:
 
-NOTE:
+![workflow2](./out/workflow2.png)
 
+_NOTE_:
+
+- `broker` is where `Celery` transport message into a queue
+- `backend` is where `Celery` store the result
 - FastAPI will not involve with `Redis` and `PostgresSQL` directly, it's done through `Celery`
 - Celery will manage backend `PostgresSQL` database via `SQLAlchemy`
 - Celery will manage broker `Redis`
@@ -19,16 +42,22 @@ NOTE:
 
 ## Get Started
 
-```sh
-docker-compose build
-# CTRL+C: just stop containers while keeping data
-docker-compose up
-docker-compose up -d
+Case 1:
 
+```sh
+docker-compose -f docker-compose-redis.yml build
+# CTRL+C: just stop containers while keeping data
+docker-compose -f docker-compose-redis.yml up
 # Remove containers with wiping data
-docker-compose down 
+docker-compose -f docker-compose-redis.yml down 
 ```
 
+Case 2:
 
-
-![](./2023-06-16-16-20-19.png)
+```sh
+docker-compose -f docker-compose-db.yml build
+# CTRL+C: just stop containers while keeping data
+docker-compose -f docker-compose-db.yml up
+# Remove containers with wiping data
+docker-compose -f docker-compose-db.yml down 
+```

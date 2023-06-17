@@ -11,7 +11,7 @@ from .tasks import (
     create_short_task,
     create_medium_task,
     create_long_task,
-    celery,
+    app as celery_app,
 )
 
 from pprint import pprint
@@ -155,8 +155,9 @@ def create_task(task: schemas.TaskIn):
 @app.get("/tasks/{task_id}", response_model=Optional[schemas.Task])
 def read_task(task_id: str):
     
-    result = AsyncResult(task_id, app=celery)
-    
+    result = AsyncResult(task_id, app=celery_app)
+    pprint(celery_app.conf.database_table_names)
+
     task = schemas.Task(
         task_id=result.task_id,
         status=result.status,

@@ -9,5 +9,5 @@ uvicorn app.main:app --reload
 ```
 
 ```sh
-celery --app app.tasks:celery worker --loglevel=info
+celery --app app.tasks:app worker --loglevel=info
 ```
