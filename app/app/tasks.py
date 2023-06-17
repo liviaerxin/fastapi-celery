@@ -3,9 +3,6 @@ from celery.result import AsyncResult
 import time
 import os
 
-BROKER_URL = os.environ.get("BROKER_URL", "redis://redis:6379")
-RESULT_BACKEND = os.environ.get("RESULT_BACKEND", "redis://redis:6379")
-
 app = Celery("tasks")
 app.config_from_object("app.celeryconfig")
 
