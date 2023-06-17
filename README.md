@@ -4,22 +4,25 @@ An example microservices illustrates how to perform heavy background computation
 
 ![](./2023-06-16-16-20-19.png)
 
-Case 1: Celery uses `Redis` as both of `broker` and `backend`.
+## Case 1
 
-tech stack:
+Celery uses `Redis` as both of `broker` and `backend`.
+
+Tech stack:
 
 - FastAPI
 - Celery
   - Redis: as broker and backend
 
-workflow:
+Workflow:
 
 ![workflow1](./out/workflow1.png)
 
-Case 2:
+## Case 2
+
 Celery uses  `Redis` as `broker` and `PostgresSQL` as `backend`.
 
-tech stack:
+Tech stack:
 
 - FastAPI
 - Celery
@@ -27,7 +30,7 @@ tech stack:
   - PostgresSQL: lower backend
   - SQLAlchemy: higher backend
 
-workflow:
+Workflow:
 
 ![workflow2](./out/workflow2.png)
 
