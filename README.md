@@ -1,4 +1,4 @@
-# FastAPI + Celery + Redis/PostgresSQL + Flower Example
+# FastAPI + Celery Example
 
 An example microservices illustrates how to perform heavy background computation task such as running machine learning model.
 
