@@ -10,7 +10,7 @@ tech stack:
 
 - FastAPI
 - Celery
-- Redis: as broker and backend
+  - Redis: as broker and backend
 
 workflow:
 
@@ -23,9 +23,9 @@ tech stack:
 
 - FastAPI
 - Celery
-- Redis: as broker
-- PostgresSQL: lower backend
-- SQLAlchemy: higher backend
+  - Redis: as broker
+  - PostgresSQL: lower backend
+  - SQLAlchemy: higher backend
 
 workflow:
 
