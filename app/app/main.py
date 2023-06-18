@@ -79,7 +79,8 @@ html_content = """
     })
     .then(response => response.json())
     .then(task => {
-        getStatus(task.task_id)
+        const task_id = task.task_id
+        getStatus(task_id)
     })
     }
 
